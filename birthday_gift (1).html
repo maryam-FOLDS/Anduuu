@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Aanduu 🎁</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Segoe UI', Tahoma, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* First Page */
+        .first-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            animation: fadeOut 1s ease-in-out 3s forwards;
+        }
+
+        .first-page h1 {
+            font-size: 4rem;
+            color: white;
+            text-align: center;
+            animation: textGlow 2s ease-in-out infinite, slideIn 1s ease-out;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            padding: 0 20px;
+        }
+
+        /* Main Content */
+        .main-content {
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out 4s forwards;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px 50px;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: cardSlideIn 1.5s ease-out 4.5s both;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .emojis {
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 30px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .message {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #333;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .message p {
+            margin-bottom: 25px;
+            animation: textSlideIn 1s ease-out both;
+            opacity: 0;
+        }
+
+        .message p:nth-child(1) { animation-delay: 5s; }
+        .message p:nth-child(2) { animation-delay: 5.3s; }
+        .message p:nth-child(3) { animation-delay: 5.6s; }
+        .message p:nth-child(4) { animation-delay: 5.9s; }
+        .message p:nth-child(5) { animation-delay: 6.2s; }
+        .message p:nth-child(6) { animation-delay: 6.5s; }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            font-size: 1.5rem;
+            margin-top: 40px;
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: fixed;
+            font-size: 2rem;
+            animation: floatUp 6s ease-in infinite;
+            opacity: 0;
+            z-index: 999;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            animation: confettiFall 4s linear infinite;
+            z-index: 999;
+        }
+
+        /* Animations */
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes cardSlideIn {
+            from {
+                transform: translateY(100px) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes textSlideIn {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 0 0 60px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .first-page h1 {
+                font-size: 2.5rem;
+            }
+            
+            .card {
+                padding: 40px 30px;
+            }
+            
+            .message {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+            
+            .emojis {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- First Page -->
+    <div class="first-page">
+        <h1>To Aanduu 💝</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="card">
+            <div class="emojis">🥳🎁🎈</div>
+            <div class="message">
+                <p>This birthday gift may be small, but it carries a piece of my heart with it.</p>
+                <p>May your life always be as beautiful as your soul—filled with laughter, warmth, and everything you've ever quietly wished for 🤍✨</p>
+                <p>I feel incredibly lucky to have you in my life 🥹❤️ Your presence itself is priceless; no gift could ever match your value. I know many people gave you birthday presents, but I wanted to give you something a little different—something that comes from a deeper place, just for you 🤍🎀</p>
+                <p>This gift was meant for you long ago and found its way to you now—maybe a little late, but carrying the same love, if not more 🫂🧿</p>
+                <p>Always stay the way you are… you truly mean a lot to me 🤍🥹🤗</p>
+                <div class="signature">From yours,<br>Prannu 💕</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://raw.githubusercontent.com/maryam-FOLDS/Anduuu/main/Tenu%20sang%20rkhna.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Play music from 20 seconds
+        const audio = document.getElementById('bgMusic');
+        
+        // Set starting position immediately
+        audio.currentTime = 20;
+        
+        // Try to play as soon as possible
+        function playAudio() {
+            audio.currentTime = 20;
+            audio.play().then(function() {
+                console.log("Music playing from 20th second!");
+            }).catch(function(error) {
+                console.log("Click anywhere to start the music!");
+                // Show a subtle message
+                const clickMsg = document.createElement('div');
+                clickMsg.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.9);padding:15px 30px;border-radius:50px;font-size:1.1rem;z-index:9999;box-shadow:0 5px 20px rgba(0,0,0,0.3);animation:bounce 2s ease-in-out infinite;';
+                clickMsg.textContent = '🎵 Click anywhere to start the music';
+                document.body.appendChild(clickMsg);
+                
+                document.body.addEventListener('click', function() {
+                    clickMsg.remove();
+                    audio.currentTime = 20;
+                    audio.play();
+                }, { once: true });
+            });
+        }
+        
+        // Try multiple times to ensure it plays
+        window.addEventListener('load', playAudio);
+        document.addEventListener('DOMContentLoaded', playAudio);
+        
+        // Ensure it starts from 20 seconds even if user interacts
+        audio.addEventListener('loadedmetadata', function() {
+            audio.currentTime = 20;
+        });
+
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['❤️', '💕', '💖', '💗', '💝', '🤍'][Math.floor(Math.random() * 6)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 4 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Create confetti
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f7b731', '#5f27cd', '#00d2d3'];
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+
+        // Generate hearts and confetti
+        setInterval(createHeart, 800);
+        setInterval(createConfetti, 300);
+
+        // Initial burst
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => {
+                createConfetti();
+                createHeart();
+            }, i * 100);
+        }
+    </script>
+</body>
+</html>
